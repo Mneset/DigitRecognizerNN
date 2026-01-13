@@ -9,13 +9,32 @@ namespace DigitRecognizerNN
         public Neuron[] Neurons { get; set; }
         public double[,] Weights { get; set; }
 
-        public Layer(int numbersOfNeurons, int numberOfInputs)
+        public Layer(int numberOfNeurons, int numberOfInputs)
         {
+            Neurons = new Neuron[2];
 
+            for (int i = 0; i < Neurons.Length; i++)
+            {
+                Neurons[i] = new Neuron();
+                Neurons[i].Bias = 0;
+            }
+
+            Weights = new double[numberOfNeurons, numberOfInputs];
+
+            Random rand = new Random();
+
+            for(int i = 0; i < numberOfNeurons; i++)
+            {
+                for(int j = 0; j < numberOfInputs; j++)
+                {
+                    Weights[i, j] = (rand.NextDouble() - 0.5) * 0.5;
+                }
+            }
         }
 
         public double[] ComputeOutputs(double[] inputs)
         {
+
 
         }
     }
