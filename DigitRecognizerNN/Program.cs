@@ -28,14 +28,26 @@ namespace DigitRecognizerNN
             int numberOfInputs = 3;
 
             Layer layer = new Layer(numberOfNeurons, numberOfInputs);
+            Layer layer2 = new Layer(numberOfNeurons, layer.Neurons.Length);
 
             double[] inputs = new double[] {1.0, 0.9, 0.7};
 
+            Console.WriteLine($"Weight for Neuron 0 in Layer 1: {layer.Weights[0, 0]}");
+            Console.WriteLine($"Weight for Neuron 0 in Layer 1: {layer.Weights[0, 1]}");
+            Console.WriteLine($"Weight for Neuron 0 in Layer 1: {layer.Weights[0, 2]}");
+            Console.WriteLine($"Bias for Neuron 0 in Layer 1: {layer.Neurons[0].Bias}");
+
             double[] outputs = layer.ComputeOutputs(inputs);
+            double[] outputs2 = layer2.ComputeOutputs(outputs);
 
             for(int i = 0; i < outputs.Length; i++)
             {
-                Console.WriteLine($"Neuron {i} output: {outputs[i]}");
+                Console.WriteLine($"Neuron {i} in Layer 1 output: {outputs[i]}");
+            }
+
+            for (int i = 0; i < outputs2.Length; i++)
+            {
+                Console.WriteLine($"Neuron {i} in Layer 2 output: {outputs2[i]}");
             }
 
             Console.WriteLine("\nPress any key to exit...");
