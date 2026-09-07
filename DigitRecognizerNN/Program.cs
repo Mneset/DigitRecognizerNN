@@ -24,6 +24,20 @@ namespace DigitRecognizerNN
             Console.WriteLine($"Activated output for input -5.0: {neuron.Activate(-5.0)}");
             Console.WriteLine($"Activated output for input 5.0: {neuron.Activate(5.0)}");
 
+            int numberOfNeurons = 2;
+            int numberOfInputs = 3;
+
+            Layer layer = new Layer(numberOfNeurons, numberOfInputs);
+
+            double[] inputs = new double[] {1.0, 0.9, 0.7};
+
+            double[] outputs = layer.ComputeOutputs(inputs);
+
+            for(int i = 0; i < outputs.Length; i++)
+            {
+                Console.WriteLine($"Neuron {i} output: {outputs[i]}");
+            }
+
             Console.WriteLine("\nPress any key to exit...");
             Console.ReadKey();
         }

@@ -11,7 +11,7 @@ namespace DigitRecognizerNN
 
         public Layer(int numberOfNeurons, int numberOfInputs)
         {
-            Neurons = new Neuron[2];
+            Neurons = new Neuron[numberOfNeurons];
 
             for (int i = 0; i < Neurons.Length; i++)
             {
@@ -23,9 +23,9 @@ namespace DigitRecognizerNN
 
             Random rand = new Random();
 
-            for(int i = 0; i < numberOfNeurons; i++)
+            for (int i = 0; i < numberOfNeurons; i++)
             {
-                for(int j = 0; j < numberOfInputs; j++)
+                for (int j = 0; j < numberOfInputs; j++)
                 {
                     Weights[i, j] = (rand.NextDouble() - 0.5) * 0.5;
                 }
@@ -34,8 +34,23 @@ namespace DigitRecognizerNN
 
         public double[] ComputeOutputs(double[] inputs)
         {
+            double[] outputs = new double [Neurons.Length];
 
+            for (int i = 0; i < Neurons.Length; i++)
+            {
+                double sum = 0;
+                for (int j = 0; j < inputs.Length; j++)
+                {
+                   sum += inputs[j] * Weights[i, j];
+                }
 
+                double z = sum + Neurons[i].Bias;
+                double output = Neurons[i].Activate(z);
+                outputs[i] = output;
+            }
+            return outputs;
         }
+
+       
     }
 }
