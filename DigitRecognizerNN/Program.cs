@@ -30,24 +30,37 @@ namespace DigitRecognizerNN
             Layer layer = new Layer(numberOfNeurons, numberOfInputs);
             Layer layer2 = new Layer(numberOfNeurons, layer.Neurons.Length);
 
-            double[] inputs = new double[] {1.0, 0.9, 0.7};
+            double[] inputs = new double[] { 1.0, 0.9, 0.7 };
 
-            Console.WriteLine($"Weight for Neuron 0 in Layer 1: {layer.Weights[0, 0]}");
+            Console.WriteLine($"\nWeight for Neuron 0 in Layer 1: {layer.Weights[0, 0]}");
             Console.WriteLine($"Weight for Neuron 0 in Layer 1: {layer.Weights[0, 1]}");
             Console.WriteLine($"Weight for Neuron 0 in Layer 1: {layer.Weights[0, 2]}");
-            Console.WriteLine($"Bias for Neuron 0 in Layer 1: {layer.Neurons[0].Bias}");
+            Console.WriteLine($"Bias for Neuron 0 in Layer 1: {layer.Neurons[0].Bias}\n");
 
             double[] outputs = layer.ComputeOutputs(inputs);
             double[] outputs2 = layer2.ComputeOutputs(outputs);
 
-            for(int i = 0; i < outputs.Length; i++)
+            for (int i = 0; i < outputs.Length; i++)
             {
                 Console.WriteLine($"Neuron {i} in Layer 1 output: {outputs[i]}");
             }
 
+            Console.WriteLine("");
+
             for (int i = 0; i < outputs2.Length; i++)
             {
                 Console.WriteLine($"Neuron {i} in Layer 2 output: {outputs2[i]}");
+            }
+
+            Console.WriteLine("");
+
+            NeuralNetwork neuralNetwork = new NeuralNetwork(new int[] {3, 2, 4});
+
+            double[] nnOutputs = neuralNetwork.ComputeOutputs(inputs);
+
+            for (int i = 0; i < nnOutputs.Length; i++)
+            {
+                Console.WriteLine($"Output: {nnOutputs[i]}");
             }
 
             Console.WriteLine("\nPress any key to exit...");
