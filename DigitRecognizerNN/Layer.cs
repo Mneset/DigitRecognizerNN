@@ -8,6 +8,7 @@ namespace DigitRecognizerNN
     {
         public Neuron[] Neurons { get; set; }
         public double[,] Weights { get; set; }
+        public double[] Inputs { get; set; } 
 
         public Layer(int numberOfNeurons, int numberOfInputs)
         {
@@ -35,6 +36,7 @@ namespace DigitRecognizerNN
         public double[] ComputeOutputs(double[] inputs)
         {
             double[] outputs = new double [Neurons.Length];
+            
 
             for (int i = 0; i < Neurons.Length; i++)
             {
@@ -45,10 +47,19 @@ namespace DigitRecognizerNN
                 }
 
                 double z = sum + Neurons[i].Bias;
+                Neurons[i].PreActivation = z;
+                Inputs = inputs;
                 double output = Neurons[i].Activate(z);
                 outputs[i] = output;
             }
             return outputs;
+        }
+
+        public void ComputeOutputDeltas(double[] targets)
+        {
+            for (int i = 0; i < Neurons.Length; i++)
+            {
+                Neurons[i].Delta = 2 * (Neurons[i].Output - targets[i]) * Neurons[i].ActivateDerivative(Neurons[i].PreActivation);           }
         }
 
        
